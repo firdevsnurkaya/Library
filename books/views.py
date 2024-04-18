@@ -21,6 +21,8 @@ def getBooksByCategory(request, category_name):
     except:
         return HttpResponseNotFound("Yanlış Kategori Seçimi, lütfen gitmek istediğiniz sayfayı kontrol ediniz.")
 
+def getBooksByCategoryId(request, category_id):
+    category_list = list(data.keys())
 def getBooksByAuthor(request):
     return HttpResponse("Yazara göre kitap listesi")
 
