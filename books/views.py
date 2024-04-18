@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 
 # Create your views here.
@@ -15,8 +15,11 @@ def books(request):
     return HttpResponse("Kitaplar Sayfası")
 
 def getBooksByCategory(request, category_name):
-    category_text = data[category_name]
-    return HttpResponse(category_text)
+    try:
+        category_text = data[category_name]
+        return HttpResponse(category_text)
+    except:
+        return HttpResponseNotFound("Yanlış Kategori Seçimi, lütfen gitmek istediğiniz sayfayı kontrol ediniz.")
 
 def getBooksByAuthor(request):
     return HttpResponse("Yazara göre kitap listesi")
