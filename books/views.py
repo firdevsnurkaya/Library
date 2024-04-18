@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 
 
@@ -23,6 +23,11 @@ def getBooksByCategory(request, category_name):
 
 def getBooksByCategoryId(request, category_id):
     category_list = list(data.keys())
+    if category_id > len(category_list):
+        return HttpResponseNotFound("Yanlış kategori Seçimi...")
+    redirect_text = category_list[category_id-1]
+
+    return redirect("/books/category/" + redirect_text)
 def getBooksByAuthor(request):
     return HttpResponse("Yazara göre kitap listesi")
 

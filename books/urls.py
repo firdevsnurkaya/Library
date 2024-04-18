@@ -6,6 +6,7 @@ urlpatterns = [
     path("books/", views.books, name="books"),
     path("books/<int:id>/", views.bookdetail, name="book-detail"),
     path("books/<str:name>/", views.bookdetailname, name="book-detail-name"),
+    path("books/category/<int:category_id>", views.getBooksByCategoryId, name = "category_id"),
     path("books/category/<str:category_name>/", views.getBooksByCategory, name= "category"),
     path("books/author", views.getBooksByAuthor, name= "author"),
     path("authors/", views.authors, name="authors"),
