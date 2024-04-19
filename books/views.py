@@ -14,7 +14,9 @@ def index(request):
     return HttpResponse("Anasayfa")
 
 def books(request):
-    return HttpResponse("Kitaplar Sayfası")
+    books = Book.objects.all()
+    context = {"books": books}
+    return render(request, "books.html", context)
 
 def getBooksByCategory(request, category_name):
     try:
@@ -39,22 +41,26 @@ def getBooksByAuthor(request):
 
 
 def authors(request):
-    return HttpResponse("Yazarlar Sayfası")
+    authors = Author.objects.all()
+    context = {"authors": authors}
+    return render(request,"authors.html", context)
 
 def categories(request):
-    return HttpResponse("Kategoriler Sayfası")
+    categories = Category.objects.all()
+    context = {"categories": categories}
+    return render(request, "categories.html", context)
 
 def bookdetail(request, id):
     try:
         book = Book.objects.get(id=id)
-        return HttpResponse(f"{book} Kitabının detay sayfası")
+        return render(request, "book-detail.html", {"book": book})
     except:
         return HttpResponseNotFound("Kitap Bulunamadı...")
 
 def bookdetailname(request, slug_name):
     try:
-        book = Book.objects.get(slug=slug_name)
-        return HttpResponse(f"{book} adlı Kitap detay sayfası")
+        context = {"book" : Book.objects.get(slug=slug_name)}
+        return render(request, "book-detail-name.html", context )
     except Book.DoesNotExist:
         return HttpResponseNotFound("Kitap Bulunamadı....")
 

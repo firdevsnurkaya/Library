@@ -6,7 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Sitemizdeki yazarlar: </h1>
+    <p>
+        <ul>
+            {% for author in authors %}
+            <li>{{ author }}</li>
+            {%endfor%}
+        </ul>
+    </p>
 </body>
 </html>
-
