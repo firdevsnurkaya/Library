@@ -16,15 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("books.urls")),
-    path("books/", include("books.urls")),
-
+    path("books/", include("books.urls")), # http://localhost:8000/books
+    path("", include("pages.urls")), # http://localhost:8000/
+    path("users/", include("users.urls")),# http://localhost:8000/users/
 ]
-# http://localhost:8000/ ==> books appinin altındaki urls.py ye yönlendir.
-# http://127.0.0.1:8000/ ==> books appinin altındaki urls.py ye yönlendir.
 
-# http://localhost:8000/books/ ==> books appinin altındaki urls.py ye yönlendir.
-
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # resim linki için eklenir
